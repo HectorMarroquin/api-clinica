@@ -21,7 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group([
  
   //  'middleware' => 'auth:api',
-    'prefix' => 'auth'
+    'prefix' => 'auth',
+    // 'middleware' => ['permission:edit articles']
  
 ], function ($router) {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -29,4 +30,7 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('/me', [AuthController::class, 'me'])->name('me');
+    Route::post('/list', [AuthController::class, 'list']);
+    Route::post('/reg', [AuthController::class, 'reg']);
+
 });
