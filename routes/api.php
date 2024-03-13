@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\Rol\RolesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,3 +35,13 @@ Route::group([
     Route::post('/reg', [AuthController::class, 'reg']);
 
 });
+
+Route::group([
+ 
+      'middleware' => 'auth:api',
+     // 'prefix' => 'auth',
+      // 'middleware' => ['permission:edit articles']
+   
+  ], function ($router) {
+      Route::resource("roles",RolesController::class);
+  });
