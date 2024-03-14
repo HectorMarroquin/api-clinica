@@ -24,10 +24,11 @@ class RolesController extends Controller
         // Transformar la respuesta JSON
         $formattedRoles = $roles->map(function ($role) {
             return [
-                'id'         => $role->id,
-                'name'       => $role->name,
-                'permission' => $role->permission,
-                'created_at' => $role->created_at->format('Y-m-d h:i:s'),
+                'id'              => $role->id,
+                'name'            => $role->name,
+                'permision'       => $role->permissions,
+                'permision_pluck' => $role->permissions->pluck("name"),
+                'created_at'      => $role->created_at->format('Y-m-d h:i:s'),
             ];
         });
 
@@ -92,7 +93,7 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->update($request->all());
 
-        $role->syncPermissions($request->permission);
+        $role->syncPermissions($request->permisions);
         
         return response()->json([
             'message'      => 200,
