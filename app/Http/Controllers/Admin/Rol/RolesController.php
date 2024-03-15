@@ -106,6 +106,13 @@ class RolesController extends Controller
     public function destroy(string $id)
     {
         $role = Role::findOrFail($id);
+        if( $role->users->count() > 0)   {  
+            return response()->json([
+                'message'      => 200,
+                'message_text' => 'Este rol ya esta asignado a uno o varios usuarios y no se puede eliminar',
+            ]);
+        }
+        
         $role->delete();
         return response()->json([
             'message'      => 200,
