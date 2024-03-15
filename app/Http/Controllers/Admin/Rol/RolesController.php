@@ -72,7 +72,14 @@ class RolesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $role = Role::findOrFail($id);
+        return response()->json([
+            'id'              => $role->id,
+            'name'            => $role->name,
+            'permision'       => $role->permissions,
+            'permision_pluck' => $role->permissions->pluck("name"),
+            'created_at'      => $role->created_at->format('Y-m-d h:i:s'),
+        ]);
     }
 
     /**
@@ -112,7 +119,7 @@ class RolesController extends Controller
                 'message_text' => 'Este rol ya esta asignado a uno o varios usuarios y no se puede eliminar',
             ]);
         }
-        
+
         $role->delete();
         return response()->json([
             'message'      => 200,
