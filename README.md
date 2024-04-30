@@ -29,6 +29,7 @@ Esto es una Api creado en Laravel para una clinica permite proveer de toda la l√
 6.  `php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"`
 7.  `php artisan jwt:secret`
 8.  `php artisan serve`
+9. modificar el .env el **APP_URL**
 
 ## Notas importantes.
 

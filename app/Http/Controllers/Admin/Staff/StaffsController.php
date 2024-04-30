@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User\UserCollection;
 use Illuminate\Support\Facades\Storage;
 
 class StaffsController extends Controller
@@ -24,7 +25,7 @@ class StaffsController extends Controller
         ->get(); // Obtener todos los resultados sin paginación
 
         return response()->json([
-            "user" =>$users,
+            "user" => UserCollection::make($users),
         ]);
     }
     public function config(){
