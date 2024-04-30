@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\Rol\RolesController;
+use App\Http\Controllers\Admin\Staff\StaffsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,9 +40,9 @@ Route::group([
 Route::group([
  
       'middleware' => 'auth:api',
-     // 'prefix' => 'auth',
-      // 'middleware' => ['permission:edit articles']
-   
+
   ], function ($router) {
       Route::resource("roles",RolesController::class);
+      Route::get("staffs/config",[StaffsController::class,"config"]);
+      Route::resource("staffs",StaffsController::class);
   });
